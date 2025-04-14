@@ -1,0 +1,451 @@
+--------------------------------------26/03
+
+React:
+
+DOM:
+
+
+React work's on Virtual DOM
+
+
+
+----------------------------------------------------------------------------27/03
+
+
+CRA - Create React Application - Tool
+
+
+
+Vite - Build Tool 
+
+JSX = javascript expression({})  or JavaScript xml
+
+BABEL --> convert javascript code to react code
+
+styling with different css : using internal varible, exterfiles, and inline 
+
+import and export data from one file to another file
+
+
+---------------------------------------------------------------01/04/25
+
+import React from 'react'
+import Myimg from './p1.png'
+import PropTypes from 'prop-types'  
+export default function ProfileComponent(props) 
+{
+ 
+/*const yes=<div>
+<h4>Profile</h4>
+<img src={Myimg}></img>
+<p>Name:{props.name}, Designation: {props.desg} Age:{props.age}</p>
+</div>
+
+const no= <p>Please Provide details to get your profile displayed</p>
+
+*/
+// Step 1: Using traditional if-else
+ if(props.loginStatus)
+    {
+      return(
+               <div>
+                <h4>Profile</h4>
+                <img src={Myimg}></img>
+                <p>Name:{props.name}, Designation: {props.desg} Age:{props.age}</p>
+                </div>
+        )
+  }
+else
+return(
+    <p>Please Provide details to get your profile displayed</p>
+)
+
+
+
+
+
+  /*return (
+  // ternary opertors
+    <p>{props.loginStatus? yes: no}</p>
+
+  )*/
+
+
+}
+// PropTypes
+ProfileComponent.propTypes={
+name:PropTypes.string,
+age:PropTypes.number,
+desg:PropTypes.string
+}
+ProfileComponent.defaultProps={
+  name:"Anonymous",
+  age:0,
+  desg:"Stiil to Assign from HR"
+  }
+  
+  
+
+
+
+import React from 'react'
+import Myimg from './p1.png'
+import PropTypes from 'prop-types'  
+export default function ProfileComponent(props) 
+{
+ 
+/*const yes=<div>
+<h4>Profile</h4>
+<img src={Myimg}></img>
+<p>Name:{props.name}, Designation: {props.desg} Age:{props.age}</p>
+</div>
+
+const no= <p>Please Provide details to get your profile displayed</p>
+
+*/
+// Step 1: Using traditional if-else
+ if(props.loginStatus)
+    {
+      return(
+               <div>
+                <h4>Profile</h4>
+                <img src={Myimg}></img>
+                <p>Name:{props.name}, Designation: {props.desg} Age:{props.age}</p>
+                </div>
+        )
+  }
+else
+return(
+    <p>Please Provide details to get your profile displayed</p>
+)
+
+
+
+
+
+  /*return (
+  // ternary opertors
+    <p>{props.loginStatus? yes: no}</p>
+
+  )*/
+
+
+}
+// PropTypes
+ProfileComponent.propTypes={
+name:PropTypes.string,
+age:PropTypes.number,
+desg:PropTypes.string
+}
+ProfileComponent.defaultProps={
+  name:"Anonymous",
+  age:0,
+  desg:"Stiil to Assign from HR"
+  }
+  
+  -----------------------------02-04-25
+
+  useState(), and useContext()
+
+javaScript spreadoperator,
+Hooks--->Event handling------->EventBinding------------>StateBinding
+
+----------------------------------03-04-25
+
+useState(), and useRef()
+
+event------>handling-------->eventHandler----------->button(onClick={})--------->text(onChange={})
+
+
+1. create Registration from
+
+name:textfiled
+gender:check box
+subscription:radio -yes,no
+country:drop down
+submitData:button
+
+2. this has to be sent on formSubmission
+3. print all the data in a pragragph
+
+
+
+React Router:
+  To implementing we need to install 
+    npm install react-router-DOM
+
+Browser Router:
+
+
+
+Route---->
+package--->
+install: react-router-dom---------------->
+BrowserRouter--------->Routes--------->Route---------->Link----------->Outlet
+
+
+
+Route Parameter:
+  1. Path Parameter -  React Library( useParams() ) - http://localhost:5173/order/3/hello
+
+    import {BrowserRouter,Routes,Route,Link, Outlet, useParams} from 'react-router-dom';
+
+    <Route path="/order/:orderid/:ordername" element={<Orders/>}/>
+
+
+    let myorder = useParams();
+    console.log(myorder.orderid);
+    console.log(myorder.ordername);
+
+    let{orderid, ordername} = useParams();
+    console.log(orderid);
+    console.log(ordername);
+
+  2. Query Parameter - React Library( useLocation() ) - 
+
+import {BrowserRouter,Routes,Route,Link, Outlet, useLocation} from 'react-router-dom';
+
+  let mylocation = useLocation();
+    console.log("what is the location" +mylocation);
+    console.log("what is the location:"+mylocation.pathname);
+
+    let myorder = new URLSearchParams (mylocation);
+    console.log(myorder);
+
+
+syntax:
+  /order/:order/:item
+            |      |
+            |      |-key value
+            |-key value
+
+
+useExffect:
+  Functional Component Hooks its used for Asynchronous, real time updates, fetch api and State management, clean of object
+
+          useExffect(function, [dependencies])
+          useExffect(function)
+ Syntax:                
+          useExffect(()=>{}); - re-redering
+                or
+          useExffect(()=>{},[]); - mount
+                or
+          useExffect(()=>{}, [Value]); - State change + mount
+
+Example: 
+
+import React,{useState,useEffect} from "react";
+
+export default function SideComp(){
+    
+    let [data, setData] = useState(0);
+    let[addcolor, seAddcolor] = useState("blue");
+     
+    useEffect(
+        ()=>{
+               document.title = "Hello All: " +data+ "Im colored: "+addcolor; 
+        }, [data, addcolor]
+    )
+
+    function Increase(){
+        setData(d=>d+1);
+    }
+
+    function Decrese(){
+        setData(d=>d-1);
+    }
+
+    function MySideCode(){
+        seAddcolor(addcolor => addcolor?"red":"blue");
+    }
+
+    return(
+        <div>
+            useEffect
+            <button onClick={Increase}>Increase</button>
+            <button onClick={Decrese}>Decrease</button>
+            <button onClick={MySideCode}>Change Color</button>
+            <h1 style={{color:addcolor}}>{data}</h1>
+        </div>
+    )
+}
+-----------------------------------------------------------------------------------------------------
+
+------------------------------------- Api Integreations-----------------------------------------------
+
+Http Request and Response ----------> fetch (javaScript Library) or axios 
+
+fetch: 
+  its provide the http operations like get,put, post, delete, patch...etc,.
+
+Redux - Global State management.  
+Redux treams:
+  1. Store    - Data Point
+  2. Reducer    - its known where is the data
+  3. Dispach    - 
+  4. Action
+
+
+npm  install redux --------- for redux
+
+----------------------------------------------------------------------------------------------------
+prop drilling - createContext - useContext - Redux    :     Data Accessibility
+----------------------------------------------------------------------------------------------------
+
+Task:    
+---------------------
+
+//Step1 : create a Store
+
+import createStore from 'redux'
+
+const accountStore={
+    custname:"",
+    balanceamount:"",
+    contactno:""
+}
+
+
+//Step 2: Create a reducer (A reducer is just a function)
+//Stroing the initial State
+function AccountReducer(Sate = accountStore, acction){
+
+  if(action.type === "deposit"){
+    return ...State,balanceamount : Sate.balanceamount + action.payload;
+  }
+  else if(action.type === "withdraw"){
+    return ...State, balanceamount : Sate.balanceamount - action.payload;
+  }
+  else{
+
+  }
+
+    return State;
+}
+
+let storeobj = createStore(AccontReducer);
+
+storeobj.dispatch({type:"deposit", payload:1000});
+console.log(getState());
+storeobj.dispatch({type:"withdraw", payload:500});
+console.log(getState());
+-----------------------------------------------------------------------------------------------------------
+store.jsx
+import { createStore } from 'redux';
+import { accountReducer } from './reducer';
+
+export const store = createStore(accountReducer);
+-------------------------
+main.jsx
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App.jsx';
+import { Provider } from 'react-redux';
+import { store } from './store';
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </React.StrictMode>
+);
+-----------------------------
+app.jsx
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+function App() {
+  const account = useSelector((state) => state);
+  const dispatch = useDispatch();
+
+  return (
+    <div style={{ padding: '2rem' }}>
+      <h1>Bank Account</h1>
+      <p><strong>Name:</strong> {account.customerName}</p>
+      <p><strong>Balance:</strong> ₹{account.balanceAmount}</p>
+      <p><strong>Contact:</strong> {account.contactNumber}</p>
+
+      <button onClick={() => dispatch({ type: "deposit", payload: 1000 })}>Deposit ₹1000</button>
+      <button onClick={() => dispatch({ type: "withdraw", payload: 500 })}>Withdraw ₹500</button>
+      <button onClick={() => dispatch({ type: "updateName", payload: "Chaitanya Prasad" })}>Update Name</button>
+      <button onClick={() => dispatch({ type: "updateContact", payload: "999-888-7777" })}>Update Contact</button>
+      <button onClick={() => dispatch({ type: "reset" })}>Reset</button>
+    </div>
+  );
+}
+
+export default App;
+---------------------------------------
+reducer.jsx
+const initialState = {
+    customerName: "chaitu",
+    balanceAmount: 5000,
+    contactNumber: "123-456-7890"
+  };
+  
+  export function accountReducer(state = initialState, action) {
+    if (action.type === "deposit") {
+      return {
+        ...state,
+        balanceAmount: state.balanceAmount + action.payload
+      };
+    } else if (action.type === "withdraw") {
+      return {
+        ...state,
+        balanceAmount: state.balanceAmount - action.payload
+      };
+    } else if (action.type === "updateName") {
+      return {
+        ...state,
+        customerName: action.payload
+      };
+    } else if (action.type === "updateContact") {
+      return {
+        ...state,
+        contactNumber: action.payload
+      };
+    } else if (action.type === "reset") {
+      return initialState;
+    } else {
+      return state;
+    }
+  }
+  
+
+
+
+
+  -------------------------------------React Testing---------------------------------------(07-04-25)
+
+Testing is a one of the part of the SDLc 
+
+React: component ---> JavaScript Library ---> JavaScript Appliction
+
+JSX: UI 
+
+Functionality Testing (JavaScript) and UI Testing (React)
+             |                             |
+      Jest(FrameWork)           React Testing Library(RTL)
+
+
+JEST:
+  it is a javaScript testing FrameWork
+  Test runner, Assertion Library and Mocking features
+  check if values meet certain conditions with Assertion Library
+
+RTL(React Testing Library):
+  it is a tool for testing React component
+  this Library is used to interact with your react component like a human being
+  it is not a alternative for JEST
+  they need each other
+
+
+Structure for writing testcases in JEST:
+
+  describe('Group of test', () =>{
+    test('idividual test', () => {
+
+    });
+  });
+
